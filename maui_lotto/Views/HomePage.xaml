@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pages:MauiPage x:Class="maui_lotto.Views.HomePage"
+                xmlns="http://schemas.microsoft.com/dotnet/2021/maui"                             
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:pages="clr-namespace:maui_lotto.Views"
+                xmlns:local="clr-namespace:maui_lotto.Views"
+                xmlns:vm="clr-namespace:maui_lotto.ViewModels"    
+                xmlns:controls="clr-namespace:maui_lotto.Controls"
+                x:DataType="vm:HomeViewModel">
+    <ContentPage.BindingContext>
+        <vm:HomeViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid>                
+                <controls:MainHeader/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <controls:MainMenu/>
+            </Grid>            
+        </Grid>
+    </ContentPage.Content>    
+</pages:MauiPage>

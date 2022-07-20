@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_lotto.Controls.MainMenu">
+
+    <ContentView.Resources>
+        <Style TargetType="Label" x:Key="MenuHeaderLabelStyle">
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="BackgroundColor" Value="#444444"/>
+            <Setter Property="TextColor" Value="Gold"/>
+            <Setter Property="Padding" Value="3"/>
+        </Style>
+
+        <Style TargetType="ListView" x:Key="MainMenuListViewStyle">
+            <Setter Property="VerticalScrollBarVisibility" Value="Never"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="BackgroundColor" Value="#F0F0F0"/>                        
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <ViewCell>                                                        
+                            <Grid BackgroundColor="#F0F0F0">
+                                
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="{Binding ImageUrl}" Aspect="AspectFit" WidthRequest="40" HeightRequest="40"/>
+                                <Label Grid.Column="1" Text="{Binding Name}" VerticalOptions="Center" Margin="10,0,0,0" FontAttributes="Bold"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ContentView.Resources>
+
+    <ScrollView BackgroundColor="#F0F0F0">
+        <VerticalStackLayout>
+            <Label Text="나의 로또" Style="{StaticResource MenuHeaderLabelStyle}"/>
+            <ListView ItemsSource="{Binding MenuMyLotto}" Style="{StaticResource MainMenuListViewStyle}"/>
+            <Label Text="번호 생성기" Style="{StaticResource MenuHeaderLabelStyle}"/>
+            <ListView ItemsSource="{Binding MenuGenerateLotto}" Style="{StaticResource MainMenuListViewStyle}"/>
+            <Label Text="번호 분석" Style="{StaticResource MenuHeaderLabelStyle}"/>
+            <ListView ItemsSource="{Binding MenuAnalysisLotto}" Style="{StaticResource MainMenuListViewStyle}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>
+
+    
