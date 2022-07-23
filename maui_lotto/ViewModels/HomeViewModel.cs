@@ -74,19 +74,33 @@ namespace maui_lotto.ViewModels
             menuGenerateLotto = new List<MainListMenu>();
             menuAnalysisLotto = new List<MainListMenu>();
 
-            menuMyLotto.Add(new MainListMenu { Name = "당첨번호 & 당첨금", ImageUrl = "/Resources/Images/magnifier.svg", Route= "//result" });
-            menuMyLotto.Add(new MainListMenu { Name = "구입번호 직접입력", ImageUrl = "/Resources/Images/write_pen.svg" });
-            menuMyLotto.Add(new MainListMenu { Name = "휴지통", ImageUrl = "/Resources/Images/trash.svg" });
+            menuMyLotto.Add(new MainListMenu { Name = "당첨번호 & 당첨금", ImageUrl = "magnifier.png", Route = "//result" });
+            menuMyLotto.Add(new MainListMenu { Name = "구입번호 직접입력", ImageUrl = "write_pen.png" });
+            menuMyLotto.Add(new MainListMenu { Name = "휴지통", ImageUrl = "trash.png" });
 
-            menuGenerateLotto.Add(new MainListMenu { Name = "생성번호목록", ImageUrl = "/Resources/Images/hamburger_menu.svg" });
-            menuGenerateLotto.Add(new MainListMenu { Name = "랜덤생성", ImageUrl = "/Resources/Images/random.svg" });
-            menuGenerateLotto.Add(new MainListMenu { Name = "직접생성", ImageUrl = "/Resources/Images/create.svg" });            
+            menuGenerateLotto.Add(new MainListMenu { Name = "생성번호목록", ImageUrl = "hamburger_menu.png" });
+            menuGenerateLotto.Add(new MainListMenu { Name = "랜덤생성", ImageUrl = "random.png" });
+            menuGenerateLotto.Add(new MainListMenu { Name = "직접생성", ImageUrl = "create.png" });
+
+
+            menuAnalysisLotto.Add(new MainListMenu { Name = "반복출현번호", ImageUrl = "patten.png" });
+            menuAnalysisLotto.Add(new MainListMenu { Name = "동반출현번호", ImageUrl = "same.png" });
+            menuAnalysisLotto.Add(new MainListMenu { Name = "번호별 출현횟수", ImageUrl = "count.png" });
+            menuAnalysisLotto.Add(new MainListMenu { Name = "패턴분석표", ImageUrl = "table.png" });
+
+            //menuMyLotto.Add(new MainListMenu { Name = "당첨번호 & 당첨금", ImageUrl = "/Resources/Images/magnifier.svg", Route= "//result" });
+            //menuMyLotto.Add(new MainListMenu { Name = "구입번호 직접입력", ImageUrl = "/Resources/Images/write_pen.svg" });
+            //menuMyLotto.Add(new MainListMenu { Name = "휴지통", ImageUrl = "/Resources/Images/trash.svg" });
+
+            //menuGenerateLotto.Add(new MainListMenu { Name = "생성번호목록", ImageUrl = "/Resources/Images/hamburger_menu.svg" });
+            //menuGenerateLotto.Add(new MainListMenu { Name = "랜덤생성", ImageUrl = "/Resources/Images/random.svg" });
+            //menuGenerateLotto.Add(new MainListMenu { Name = "직접생성", ImageUrl = "/Resources/Images/create.svg" });            
 
             
-            menuAnalysisLotto.Add(new MainListMenu { Name = "반복출현번호", ImageUrl = "/Resources/Images/patten.svg" });
-            menuAnalysisLotto.Add(new MainListMenu { Name = "동반출현번호", ImageUrl = "/Resources/Images/same.svg" });
-            menuAnalysisLotto.Add(new MainListMenu { Name = "번호별 출현횟수", ImageUrl = "/Resources/Images/count.svg" });
-            menuAnalysisLotto.Add(new MainListMenu { Name = "패턴분석표", ImageUrl = "/Resources/Images/table.svg" });
+            //menuAnalysisLotto.Add(new MainListMenu { Name = "반복출현번호", ImageUrl = "/Resources/Images/patten.svg" });
+            //menuAnalysisLotto.Add(new MainListMenu { Name = "동반출현번호", ImageUrl = "/Resources/Images/same.svg" });
+            //menuAnalysisLotto.Add(new MainListMenu { Name = "번호별 출현횟수", ImageUrl = "/Resources/Images/count.svg" });
+            //menuAnalysisLotto.Add(new MainListMenu { Name = "패턴분석표", ImageUrl = "/Resources/Images/table.svg" });
         }
 
 

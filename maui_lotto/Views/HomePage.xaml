@@ -12,19 +12,9 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <Grid>                
-                <controls:MainHeader/>
-            </Grid>
-
-            <Grid Grid.Row="1">
-                <controls:MainMenu/>
-            </Grid>            
-        </Grid>
+        <VerticalStackLayout>
+            <controls:MainHeader/>
+            <controls:MainMenu/>
+        </VerticalStackLayout>        
     </ContentPage.Content>    
 </pages:MauiPage>

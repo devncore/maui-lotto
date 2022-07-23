@@ -20,15 +20,10 @@
                 <Setter.Value>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid BackgroundColor="#F0F0F0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-
+                            <HorizontalStackLayout>
                                 <Image Source="{Binding ImageUrl}" Aspect="AspectFit" WidthRequest="40" HeightRequest="40"/>
                                 <Label Grid.Column="1" Text="{Binding Name}" VerticalOptions="Center" Margin="10,0,0,0" FontAttributes="Bold"/>
-                            </Grid>
+                            </HorizontalStackLayout>                            
                         </ViewCell>
                     </DataTemplate>
                 </Setter.Value>
