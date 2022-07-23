@@ -6,15 +6,18 @@ using VijayAnand.Toolkit.ObjectModel;
 
 namespace maui_lotto.ViewModels
 {
-    public partial class LottoResultViewModel : BaseViewModel
+    public partial class ResultViewModel : BaseViewModel
     {
         readonly IDialogService? dialogService;
 
-        public LottoResultViewModel()
+        public ResultViewModel()
         {
             Title = "당첨결과";
             dialogService = AppService.GetService<IDialogService>();
         }
+
+
+
 
         [RelayCommand]
         async void Test()

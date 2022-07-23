@@ -6,4 +6,9 @@ public partial class MainMenu : ContentView
 	{
 		InitializeComponent();
 	}
+
+	private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+	{
+
+	}
 }

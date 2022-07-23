@@ -12,6 +12,7 @@
 
     <ShellContent ContentTemplate="{DataTemplate pages:HomePage}" Route="home"/>
 
+
     <!--<FlyoutItem Title="Home" Icon="{FontImage Glyph={x:Static fas:IconFont.House}, FontFamily=FAS, Color=Black}">
         <ShellContent ContentTemplate="{DataTemplate pages:HomePage}" Route="home" />
     </FlyoutItem>

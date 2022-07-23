@@ -15,13 +15,12 @@
         <Style TargetType="ListView" x:Key="MainMenuListViewStyle">
             <Setter Property="VerticalScrollBarVisibility" Value="Never"/>
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="BackgroundColor" Value="#F0F0F0"/>                        
+            <Setter Property="BackgroundColor" Value="#F0F0F0"/>
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <ViewCell>                                                        
+                        <ViewCell>
                             <Grid BackgroundColor="#F0F0F0">
-                                
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition/>
@@ -40,7 +39,9 @@
     <ScrollView BackgroundColor="#F0F0F0">
         <VerticalStackLayout>
             <Label Text="나의 로또" Style="{StaticResource MenuHeaderLabelStyle}"/>
-            <ListView ItemsSource="{Binding MenuMyLotto}" Style="{StaticResource MainMenuListViewStyle}"/>
+            <ListView x:Name="menuMyLottoList" ItemsSource="{Binding MenuMyLotto}" Style="{StaticResource MainMenuListViewStyle}"
+                      SelectedItem="{Binding MenuMyLottoSelected, Mode=TwoWay}"/>
+            
             <Label Text="번호 생성기" Style="{StaticResource MenuHeaderLabelStyle}"/>
             <ListView ItemsSource="{Binding MenuGenerateLotto}" Style="{StaticResource MainMenuListViewStyle}"/>
             <Label Text="번호 분석" Style="{StaticResource MenuHeaderLabelStyle}"/>

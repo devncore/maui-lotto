@@ -1,4 +1,6 @@
-﻿namespace maui_lotto;
+﻿using maui_lotto.Views;
+
+namespace maui_lotto;
 
 public partial class App : Application
 {
@@ -6,6 +8,7 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-		MainPage = new AppShell();
-	}
+        //MainPage = new AppShell();
+        MainPage = new NavigationPage(new HomePage());
+    }
 }

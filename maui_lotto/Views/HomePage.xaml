@@ -6,7 +6,7 @@
                 xmlns:local="clr-namespace:maui_lotto.Views"
                 xmlns:vm="clr-namespace:maui_lotto.ViewModels"    
                 xmlns:controls="clr-namespace:maui_lotto.Controls"
-                x:DataType="vm:HomeViewModel">
+                x:DataType="vm:HomeViewModel" NavigationPage.HasNavigationBar="False">
     <ContentPage.BindingContext>
         <vm:HomeViewModel />
     </ContentPage.BindingContext>

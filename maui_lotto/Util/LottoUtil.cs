@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -20,35 +21,39 @@ namespace maui_lotto.Util
             string text = FileUtil.Load(FileName);
             if (string.IsNullOrEmpty(text) == false)
             {
-                return JsonConvert.DeserializeObject<List<LottoResult>>(text);                
+                list = JsonConvert.DeserializeObject<List<LottoResult>>(text);                
             }
-            else
+
+            int start = list.Count();
+            if (start < 1)
+                start = 1;
+
+            for (int i = start; i < 9999; i++)
             {
-                for (int i = 1; i < 9999; i++)
+                if (list.Where(x => x.drwNo == i).Count() > 0)
+                    continue;
+
+                string json = GetWebRequest($"https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo={i}");
+                if (string.IsNullOrEmpty(json))
+                    continue;
+
+                try
                 {
-                    string json = GetWebRequest($"https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo={i}");
-                    if (string.IsNullOrEmpty(json))
-                        continue;
-
-                    try
+                    var obj = JsonConvert.DeserializeObject<LottoResult>(json);
+                    if (obj.returnValue == "fail")
                     {
-                        var obj = JsonConvert.DeserializeObject<LottoResult>(json);
-                        if (obj.returnValue == "fail")
-                        {
-                            break;
-                        }
+                        break;
+                    }
 
-                        list.Add(obj);
-                    }
-                    catch (Exception ex)
-                    {
-                    }
+                    list.Add(obj);
                 }
-
-                var jsonText = JsonConvert.SerializeObject(list);
-                FileUtil.Write(FileName, jsonText);
+                catch (Exception ex)
+                {
+                }
             }
 
+            var jsonText = JsonConvert.SerializeObject(list);
+            FileUtil.Write(FileName, jsonText);
 
             return list;
         }
