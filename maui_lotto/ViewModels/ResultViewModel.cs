@@ -20,7 +20,7 @@ namespace maui_lotto.ViewModels
             dialogService = AppService.GetService<IDialogService>();
             LoadCommand = new AsyncRelayCommand(async () =>
             {
-                await Task.Delay(500);
+                await Task.Delay(1000);
                 Initialize();                
             });
         }
@@ -28,28 +28,31 @@ namespace maui_lotto.ViewModels
 
         void Initialize()
         {
-            var list = lottoResult.OrderByDescending(x => x.drwNo).ToList();
-
-            int count = 0;
-            foreach(var row in list)
+            if(ResultList == null)
             {
-                row.color1 = LottoNumToColorConvert(row.drwtNo1);
-                row.color2 = LottoNumToColorConvert(row.drwtNo2);
-                row.color3 = LottoNumToColorConvert(row.drwtNo3);
-                row.color4 = LottoNumToColorConvert(row.drwtNo4);
-                row.color5 = LottoNumToColorConvert(row.drwtNo5);
-                row.color6 = LottoNumToColorConvert(row.drwtNo6);
-                row.colorBonus = LottoNumToColorConvert(row.bnusNo);
+                var list = lottoResult.OrderByDescending(x => x.drwNo).ToList();
 
-                if (count % 2 == 0)
-                    row.bgColor = Color.FromArgb("#D3D3D3");
-                else
-                    row.bgColor = Colors.White;
+                int count = 0;
+                foreach (var row in list)
+                {
+                    row.color1 = LottoNumToColorConvert(row.drwtNo1);
+                    row.color2 = LottoNumToColorConvert(row.drwtNo2);
+                    row.color3 = LottoNumToColorConvert(row.drwtNo3);
+                    row.color4 = LottoNumToColorConvert(row.drwtNo4);
+                    row.color5 = LottoNumToColorConvert(row.drwtNo5);
+                    row.color6 = LottoNumToColorConvert(row.drwtNo6);
+                    row.colorBonus = LottoNumToColorConvert(row.bnusNo);
 
-                count++;
+                    if (count % 2 == 0)
+                        row.bgColor = Color.FromArgb("#D3D3D3");
+                    else
+                        row.bgColor = Colors.White;
+
+                    count++;
+                }
+
+                ResultList = list;
             }
-
-            ResultList = list;
         }
 
         Brush LottoNumToColorConvert(int num)
