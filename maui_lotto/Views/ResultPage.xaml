@@ -5,12 +5,18 @@
                 xmlns:pages="clr-namespace:maui_lotto.Views"
                 xmlns:local="clr-namespace:maui_lotto.Views"
                 xmlns:vm="clr-namespace:maui_lotto.ViewModels"
+                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                 Title="{Binding Title}"
+                xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
                 x:DataType="vm:ResultViewModel">
 
     <ContentPage.BindingContext>
         <vm:ResultViewModel />
     </ContentPage.BindingContext>
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding LoadCommand}" />
+    </ContentPage.Behaviors>
 
     <pages:MauiPage.Resources>
         <Style TargetType="Label" x:Key="labelNumberStyle">
@@ -19,77 +25,83 @@
             <Setter Property="TextColor" Value="White"/>
             <Setter Property="FontAttributes" Value="Italic"/>
             <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontSize" Value="20"/>
         </Style>
 
-        <Style TargetType="CollectionView" x:Key="ResultListViewStyle">
+        <Style TargetType="Ellipse" x:Key="EllipseStyle">
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="WidthRequest" Value="40"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>            
+        </Style>
+
+        <Style TargetType="ListView" x:Key="ResultListViewStyle">
             <Setter Property="VerticalScrollBarVisibility" Value="Default"/>
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="BackgroundColor" Value="#F0F0F0"/>
+            <Setter Property="BackgroundColor" Value="#F0F0F0"/>            
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <VerticalStackLayout>
-                            <HorizontalStackLayout>
-                                <Label Text="{Binding drwNo, StringFormat='{0}회차'}" HorizontalOptions="Center" TextColor="Black"/>
-                                <Label Text="{Binding drwNoDate}" TextColor="Black" HorizontalOptions="Center"/>
-                            </HorizontalStackLayout>
+                        <ViewCell>
+                            <Grid BackgroundColor="{Binding bgColor}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
 
-                            <HorizontalStackLayout>
-                                <Grid Margin="2">
-                                    <Ellipse Fill="{Binding drwtNo1, Converter={StaticResource LottoNumColorConverter}}"
-                                                Stroke="{Binding drwtNo1, Converter={StaticResource LottoNumColorConverter}}"
-                                                StrokeThickness="1" WidthRequest="20" HeightRequest="20" HorizontalOptions="Start"/>
-                                    <Label Text="{Binding drwtNo1}" Style="{StaticResource labelNumberStyle}"/>
-                                </Grid>
+                                <HorizontalStackLayout Margin="5">
+                                    <Label Text="{Binding drwNo, StringFormat='{0}회차'}" HorizontalOptions="Center" TextColor="Black"/>
+                                    <Label Text="{Binding drwNoDate}" TextColor="Black" HorizontalOptions="Center"/>
+                                </HorizontalStackLayout>
 
-                                <Grid Margin="2">
-                                    <Ellipse Fill="{Binding drwtNo2, Converter={StaticResource LottoNumColorConverter}}"
-                                                Stroke="{Binding drwtNo2, Converter={StaticResource LottoNumColorConverter}}"
-                                                StrokeThickness="1" WidthRequest="20" HeightRequest="20" HorizontalOptions="Start"/>
-                                    <Label Text="{Binding drwtNo2}" Style="{StaticResource labelNumberStyle}"/>
-                                </Grid>
+                                <HorizontalStackLayout Grid.Row="1">
+                                    <Grid Margin="2">
+                                        <Ellipse Fill="{Binding color1}" Stroke="{Binding color1}" Style="{StaticResource EllipseStyle}"/>
+                                        <Label Text="{Binding drwtNo1}" Style="{StaticResource labelNumberStyle}"/>
+                                    </Grid>
 
-                                <Grid Margin="2">
-                                    <Ellipse Fill="{Binding drwtNo3, Converter={StaticResource LottoNumColorConverter}}"
-                                                Stroke="{Binding drwtNo3, Converter={StaticResource LottoNumColorConverter}}"
-                                                StrokeThickness="1" WidthRequest="20" HeightRequest="20" HorizontalOptions="Start"/>
-                                    <Label Text="{Binding drwtNo3}" Style="{StaticResource labelNumberStyle}"/>
-                                </Grid>
+                                    <Grid Margin="2">
+                                        <Ellipse Fill="{Binding color2}" Stroke="{Binding color2}" Style="{StaticResource EllipseStyle}"/>
+                                        <Label Text="{Binding drwtNo2}" Style="{StaticResource labelNumberStyle}"/>
+                                    </Grid>
 
-                                <Grid Margin="2">
-                                    <Ellipse Fill="{Binding drwtNo4, Converter={StaticResource LottoNumColorConverter}}"
-                                                Stroke="{Binding drwtNo4, Converter={StaticResource LottoNumColorConverter}}"
-                                                StrokeThickness="1" WidthRequest="20" HeightRequest="20" HorizontalOptions="Start"/>
-                                    <Label Text="{Binding drwtNo4}" Style="{StaticResource labelNumberStyle}"/>
-                                </Grid>
+                                    <Grid Margin="2">
+                                        <Ellipse Fill="{Binding color3}" Stroke="{Binding color3}" Style="{StaticResource EllipseStyle}"/>
+                                        <Label Text="{Binding drwtNo3}" Style="{StaticResource labelNumberStyle}"/>
+                                    </Grid>
 
-                                <Grid Margin="2">
-                                    <Ellipse Fill="{Binding drwtNo5, Converter={StaticResource LottoNumColorConverter}}"
-                                                Stroke="{Binding drwtNo5, Converter={StaticResource LottoNumColorConverter}}"
-                                                StrokeThickness="1" WidthRequest="20" HeightRequest="20" HorizontalOptions="Start"/>
-                                    <Label Text="{Binding drwtNo5}" Style="{StaticResource labelNumberStyle}"/>
-                                </Grid>
+                                    <Grid Margin="2">
+                                        <Ellipse Fill="{Binding color4}" Stroke="{Binding color4}" Style="{StaticResource EllipseStyle}"/>
+                                        <Label Text="{Binding drwtNo4}" Style="{StaticResource labelNumberStyle}"/>
+                                    </Grid>
 
-                                <Grid Margin="2">
-                                    <Ellipse Fill="{Binding drwtNo6, Converter={StaticResource LottoNumColorConverter}}"
-                                                Stroke="{Binding drwtNo6, Converter={StaticResource LottoNumColorConverter}}"
-                                                StrokeThickness="1" WidthRequest="20" HeightRequest="20" HorizontalOptions="Start"/>
-                                    <Label Text="{Binding drwtNo6}" Style="{StaticResource labelNumberStyle}"/>
-                                </Grid>
+                                    <Grid Margin="2">
+                                        <Ellipse Fill="{Binding color5}" Stroke="{Binding color5}" Style="{StaticResource EllipseStyle}"/>
+                                        <Label Text="{Binding drwtNo5}" Style="{StaticResource labelNumberStyle}"/>
+                                    </Grid>
 
-                                <Grid Margin="2">
-                                    <Label Text="+" Style="{StaticResource labelNumberStyle}" TextColor="Black"/>
-                                </Grid>
+                                    <Grid Margin="2">
+                                        <Ellipse Fill="{Binding color6}" Stroke="{Binding color6}" Style="{StaticResource EllipseStyle}"/>
+                                        <Label Text="{Binding drwtNo6}" Style="{StaticResource labelNumberStyle}"/>
+                                    </Grid>
 
-                                <Grid Margin="2">
-                                    <Ellipse Fill="{Binding bnusNo, Converter={StaticResource LottoNumColorConverter}}"
-                                                Stroke="{Binding bnusNo, Converter={StaticResource LottoNumColorConverter}}"
-                                                StrokeThickness="1" WidthRequest="20" HeightRequest="20" HorizontalOptions="Start"/>
-                                    <Label Text="{Binding bnusNo}" Style="{StaticResource labelNumberStyle}"/>
-                                </Grid>
-                            </HorizontalStackLayout>
-                        </VerticalStackLayout>
+                                    <Grid Margin="2">
+                                        <Label Text="+" Style="{StaticResource labelNumberStyle}" TextColor="Black"/>
+                                    </Grid>
+
+                                    <Grid Margin="2">
+                                        <Ellipse Fill="{Binding colorBonus}" Stroke="{Binding colorBonus}" Style="{StaticResource EllipseStyle}"                                                />
+                                        <Label Text="{Binding bnusNo}" Style="{StaticResource labelNumberStyle}"/>
+                                    </Grid>
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout Grid.Row="2" Margin="5">
+                                    <Label Text="당첨금" HorizontalOptions="Center" FontSize="14"/>
+                                    <Label Text="{Binding firstWinamnt, StringFormat='{0:N0}원'}" HorizontalOptions="Center" FontSize="14"/>
+                                </HorizontalStackLayout>
+                            </Grid>                  
+                        </ViewCell>
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
@@ -99,6 +111,7 @@
 
 
     <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding ResultList}" Style="{StaticResource ResultListViewStyle}"/>
+        <ListView ItemsSource="{Binding ResultList}" Style="{StaticResource ResultListViewStyle}" CachingStrategy="RecycleElement" 
+                  android:ListView.IsFastScrollEnabled="true" RowHeight="100"/>
     </ContentPage.Content>
 </pages:MauiPage>
