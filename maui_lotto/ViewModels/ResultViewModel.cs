@@ -81,29 +81,29 @@ namespace maui_lotto.ViewModels
         }
 
 
-        [RelayCommand]
-        async void Test()
-        {
-            if (dialogService is not null)
-            {
-                if (await dialogService.DisplayAlertAsync("Quit!", "Are you sure?", "Yes", "No"))
-                {
-                    Application.Current?.Quit();
-                }
-            }
-        }
+        //[RelayCommand]
+        //async void Test()
+        //{
+        //    if (dialogService is not null)
+        //    {
+        //        if (await dialogService.DisplayAlertAsync("Quit!", "Are you sure?", "Yes", "No"))
+        //        {
+        //            Application.Current?.Quit();
+        //        }
+        //    }
+        //}
 
-        [RelayCommand]
-        private async Task Quit()
-        {
-            //if (dialogService is not null)
-            //{
-            //    if (await dialogService.DisplayAlertAsync("Quit!", "Are you sure?", "Yes", "No"))
-            //    {
-            //        Application.Current?.Quit();
-            //    }
-            //}
-        }
+        //[RelayCommand]
+        //private async Task Quit()
+        //{
+        //    //if (dialogService is not null)
+        //    //{
+        //    //    if (await dialogService.DisplayAlertAsync("Quit!", "Are you sure?", "Yes", "No"))
+        //    //    {
+        //    //        Application.Current?.Quit();
+        //    //    }
+        //    //}
+        //}
 
 
 

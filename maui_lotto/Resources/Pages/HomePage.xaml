@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<pages:MauiPage x:Class="maui_lotto.Views.HomePage"
+<ContentPage x:Class="maui_lotto.Resources.Pages.HomePage"
                 xmlns="http://schemas.microsoft.com/dotnet/2021/maui"                             
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                xmlns:pages="clr-namespace:maui_lotto.Views"
-                xmlns:local="clr-namespace:maui_lotto.Views"
+                xmlns:pages="clr-namespace:maui_lotto.Resources.Pages"                
                 xmlns:vm="clr-namespace:maui_lotto.ViewModels"    
                 xmlns:controls="clr-namespace:maui_lotto.Controls"
                 x:DataType="vm:HomeViewModel" NavigationPage.HasNavigationBar="False">
@@ -17,4 +16,4 @@
             <controls:MainMenu/>
         </VerticalStackLayout>        
     </ContentPage.Content>    
-</pages:MauiPage>
+</ContentPage>
