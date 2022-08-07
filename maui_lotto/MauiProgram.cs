@@ -1,7 +1,4 @@
-﻿using CommunityToolkit.Maui;
-using VijayAnand.MauiToolkit;
-
-namespace maui_lotto;
+﻿namespace maui_lotto;
 
 public static class MauiProgram
 {
@@ -10,7 +7,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
-            .UseVijayAnandMauiToolkit(ServiceRegistrations.Dialogs)
+            .UseVijayAnandMauiToolkit(ServiceRegistrations.Dialogs)    
             .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
@@ -24,6 +21,12 @@ public static class MauiProgram
                 fonts.AddFont("Roboto-Regular.ttf", "Roboto400");
                 fonts.AddFont("Roboto-Bold.ttf", "Roboto700");
             });
+
+        builder.Services.AddSingleton<LottoService>();
+        builder.Services.AddSingleton<HomeViewModel>();
+        builder.Services.AddSingleton<HomePage>();
+        builder.Services.AddSingleton<ResultViewModel>();
+        builder.Services.AddSingleton<ResultPage>();
 
         return builder.Build();
     }

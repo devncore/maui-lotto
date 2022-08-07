@@ -8,7 +8,6 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-        //App.Current.UserAppTheme = AppTheme.Light;
-        MainPage = new NavigationPage(new HomePage());
+        MainPage = new AppShell();
     }
 }

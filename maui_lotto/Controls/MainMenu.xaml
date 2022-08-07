@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_lotto.Controls.MainMenu">
+             xmlns:model="clr-namespace:maui_lotto.Models"
+             xmlns:viewModel="clr-namespace:maui_lotto.ViewModels"
+             x:Class="maui_lotto.Controls.MainMenu"
+             x:DataType="viewModel:HomeViewModel"
+             x:Name="contentview">
 
     <ContentView.Resources>
         <Style TargetType="Label" x:Key="MenuHeaderLabelStyle">
@@ -9,39 +13,58 @@
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="BackgroundColor" Value="#444444"/>
             <Setter Property="TextColor" Value="Gold"/>
-            <Setter Property="Padding" Value="3"/>
+            <Setter Property="Padding" Value="3"/>            
         </Style>
 
         <Style TargetType="ListView" x:Key="MainMenuListViewStyle">
             <Setter Property="VerticalScrollBarVisibility" Value="Never"/>
             <Setter Property="Margin" Value="0"/>
             <Setter Property="BackgroundColor" Value="#F0F0F0"/>
-            <Setter Property="ItemTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        <ViewCell>
-                            <HorizontalStackLayout>
-                                <Image Source="{Binding ImageUrl}" Aspect="AspectFit" WidthRequest="40" HeightRequest="40"/>
-                                <Label Grid.Column="1" Text="{Binding Name}" VerticalOptions="Center" Margin="10,0,0,0" FontAttributes="Bold"/>
-                            </HorizontalStackLayout>                            
-                        </ViewCell>
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
+            <!--RowItem 행의 높이를 각각 사용할때-->
+            <Setter Property="HasUnevenRows" Value="True"/>
         </Style>
+
+        <!-- ListView의 헤더 -->
+        <DataTemplate x:Key="MenuItemHeader">
+            <ViewCell IsEnabled="False">
+                <Grid Margin="0" Padding="0" HeightRequest="25" BackgroundColor="#aaaaaa">
+                    <Label Text="{Binding Name}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White"/>
+                </Grid>                
+            </ViewCell>
+        </DataTemplate>
+
+        <!-- ListView의 메뉴 아이템 -->
+        <DataTemplate x:Key="MenuItem">
+            <ViewCell>
+                <Frame>
+                    <Frame.GestureRecognizers>
+                        <!--<TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:HomeViewModel}}, Path=GoToMenuItemCommand}"
+                                        CommandParameter="{Binding}"/>-->
+                        <TapGestureRecognizer Tapped="MenuSelectedCommand" CommandParameter="{Binding}"/>
+                    </Frame.GestureRecognizers>
+
+                    <HorizontalStackLayout>
+                        <Image Source="{Binding ImageUrl}" Aspect="AspectFit" WidthRequest="40" HeightRequest="40"/>
+                        <Label Grid.Column="1" Text="{Binding Name}" VerticalOptions="Center" Margin="10,0,0,0" FontAttributes="Bold"/>
+                    </HorizontalStackLayout>
+                </Frame>
+            </ViewCell>
+        </DataTemplate>
+
+        <!-- DataTemplate을 선택한다 -->
+        <model:MenuItemDataTemplateSelector x:Key="MenuItemDataTemplateSelector"
+                                            Header="{StaticResource MenuItemHeader}"
+                                            Item="{StaticResource MenuItem}"/>
+
     </ContentView.Resources>
 
     <ScrollView BackgroundColor="#F0F0F0">
-        <VerticalStackLayout>
-            <Label Text="나의 로또" Style="{StaticResource MenuHeaderLabelStyle}"/>
-            <ListView x:Name="menuMyLottoList" ItemsSource="{Binding MenuMyLotto}" Style="{StaticResource MainMenuListViewStyle}"
-                      SelectedItem="{Binding MenuMyLottoSelected, Mode=TwoWay}"/>
-            
-            <Label Text="번호 생성기" Style="{StaticResource MenuHeaderLabelStyle}"/>
-            <ListView ItemsSource="{Binding MenuGenerateLotto}" Style="{StaticResource MainMenuListViewStyle}"/>
-            <Label Text="번호 분석" Style="{StaticResource MenuHeaderLabelStyle}"/>
-            <ListView ItemsSource="{Binding MenuAnalysisLotto}" Style="{StaticResource MainMenuListViewStyle}"/>
-        </VerticalStackLayout>
+        <ListView ItemsSource="{Binding MenuItemList}" 
+                  Style="{StaticResource MainMenuListViewStyle}"
+                  ItemTemplate="{StaticResource MenuItemDataTemplateSelector}"
+                  SelectedItem="{Binding MenuItemListSelected, Mode=TwoWay}">            
+        </ListView>        
     </ScrollView>
 </ContentView>
 

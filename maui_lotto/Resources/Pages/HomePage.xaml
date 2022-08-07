@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage x:Class="maui_lotto.Resources.Pages.HomePage"
-                xmlns="http://schemas.microsoft.com/dotnet/2021/maui"                             
-                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                xmlns:pages="clr-namespace:maui_lotto.Resources.Pages"                
-                xmlns:vm="clr-namespace:maui_lotto.ViewModels"    
-                xmlns:controls="clr-namespace:maui_lotto.Controls"
-                x:DataType="vm:HomeViewModel" NavigationPage.HasNavigationBar="False">
-    <ContentPage.BindingContext>
-        <vm:HomeViewModel />
-    </ContentPage.BindingContext>
-
-    <ContentPage.Content>
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"                             
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:maui_lotto.Resources.Pages"                
+             xmlns:vm="clr-namespace:maui_lotto.ViewModels"    
+             xmlns:controls="clr-namespace:maui_lotto.Controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="vm:HomeViewModel">
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding AppearingCommand}" />
+    </ContentPage.Behaviors>
+    
+    <Grid>
         <VerticalStackLayout>
             <controls:MainHeader/>
             <controls:MainMenu/>
-        </VerticalStackLayout>        
-    </ContentPage.Content>    
+        </VerticalStackLayout>
+
+        <ActivityIndicator
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="2"
+            HorizontalOptions="FillAndExpand"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
+            VerticalOptions="CenterAndExpand"/>
+    </Grid>
+    
 </ContentPage>

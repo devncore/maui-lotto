@@ -1,0 +1,13 @@
+﻿global using CommunityToolkit.Mvvm.ComponentModel;
+global using CommunityToolkit.Mvvm.Input;
+global using System.Collections.ObjectModel;
+global using System.ComponentModel;
+global using System.Diagnostics;
+global using System.Runtime.CompilerServices;
+global using System.Text.Json;
+global using maui_lotto.Services;
+global using maui_lotto.ViewModels;
+global using maui_lotto.Models;
+global using maui_lotto.Resources.Pages;
+global using CommunityToolkit.Maui;
+global using VijayAnand.MauiToolkit;

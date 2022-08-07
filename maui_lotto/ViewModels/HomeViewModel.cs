@@ -1,9 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using maui_lotto.Models;
-using maui_lotto.Util;
-using maui_lotto.Resources.Pages;
-using VijayAnand.MauiToolkit.Core.Services;
+﻿using VijayAnand.MauiToolkit.Core.Services;
 using VijayAnand.MauiToolkit.Services;
 using VijayAnand.Toolkit.ObjectModel;
 
@@ -11,109 +6,98 @@ namespace maui_lotto.ViewModels
 {
     public partial class HomeViewModel : BaseViewModel
     {
-        readonly IDialogService? dialogService;
+        LottoService lottoService;
 
-        public HomeViewModel()
+        public HomeViewModel(LottoService lottoService)
         {
             Title = "Maui-Lotto";
-            dialogService = AppService.GetService<IDialogService>();
+            this.lottoService = lottoService;
 
             InitializeMainMenuList();
 
-            lottoResult = LottoUtil.GetAllLottoResult();
-            lastResult = lottoResult.LastOrDefault();
+            AppearingCommand = new AsyncRelayCommand(async () =>
+            {
+                // 로드 이벤트를 최초에 한번만 하게 한다.
+                if (isAppearing)
+                    return;
+
+                isAppearing = true;
+
+                IsBusy = true;
+                lottoResult = await lottoService.GetLottoResult();
+                LastResult = lottoResult.LastOrDefault();
+                IsBusy = false;
+            });
+        }
+        
+        private LottoResult _LastResult;
+        public LottoResult LastResult
+        {
+            get { return _LastResult; }
+            set { _LastResult = value; OnPropertyChanged(); }
         }
 
-        [ObservableProperty]
-        private LottoResult lastResult;
-
-
-        [ObservableProperty]
-        private List<MainListMenu> menuMyLotto;
-        [ObservableProperty]
-        private List<MainListMenu> menuGenerateLotto;
-        [ObservableProperty]
-        private List<MainListMenu> menuAnalysisLotto;
-
-
-        private MainListMenu _MenuMyLottoSelected;
-        public MainListMenu MenuMyLottoSelected
+        private List<object> _MenuItemList;
+        public List<object> MenuItemList
         {
-            get { return _MenuMyLottoSelected; }
-            set 
-            { 
-                _MenuMyLottoSelected = value; 
-                if(value != null)
+            get { return _MenuItemList; }
+            set { _MenuItemList = value; OnPropertyChanged(); }
+        }
+
+        private MainMenuItem _MenuItemListSelected;
+        public MainMenuItem MenuItemListSelected
+        {
+            get { return _MenuItemListSelected; }
+            set
+            {
+                _MenuItemListSelected = value;
+                OnPropertyChanged();
+                if (value != null && value is MainMenuItem)
                 {
-                    string route = value.Route;
-                    _MenuMyLottoSelected = null;
-                    OnPropertyChanged();
-                    NavigationPage(route);
+                    //GoToMenuItemCommand(value);
                 }
             }
         }
 
-        void NavigationPage(string route)
+        [RelayCommand]
+        async Task GoToMenuItemCommand(MainMenuItem item)
         {
-            switch(route)
-            {
-                case "//result":
-                    App.Current.MainPage.Navigation.PushAsync(new ResultPage());
-                    //Shell.Current.GoToAsync(route);
-                    break;
-                default:
-                    break;
-            }
-        }
+            if (item == null)
+                return;
 
+            IsBusy = true;
+            await Shell.Current.GoToAsync(nameof(ResultPage), true);
+            IsBusy = false;
+
+            //await Shell.Current.GoToAsync(nameof(ResultPage), true, new Dictionary<string, object>
+            //{
+            //    {"Item", item }
+            //});
+        }
 
 
         private void InitializeMainMenuList()
         {
-            menuMyLotto = new List<MainListMenu>();
-            menuGenerateLotto = new List<MainListMenu>();
-            menuAnalysisLotto = new List<MainListMenu>();
+            MenuItemList = new List<object>();
+            MenuItemList.Add(new MainMenuItemHeader { Name = "나의 로또" });
+            MenuItemList.Add(new MainMenuItem { Name = "당첨번호 & 당첨금", ImageUrl = "magnifier.png", Route = "//result" });
+            MenuItemList.Add(new MainMenuItem { Name = "구입번호 직접입력", ImageUrl = "write_pen.png", Route = "//result" });
+            MenuItemList.Add(new MainMenuItem { Name = "휴지통", ImageUrl = "trash.png", Route = "//result" });
 
-            menuMyLotto.Add(new MainListMenu { Name = "당첨번호 & 당첨금", ImageUrl = "magnifier.png", Route = "//result" });
-            menuMyLotto.Add(new MainListMenu { Name = "구입번호 직접입력", ImageUrl = "write_pen.png" });
-            menuMyLotto.Add(new MainListMenu { Name = "휴지통", ImageUrl = "trash.png" });
+            MenuItemList.Add(new MainMenuItemHeader { Name = "번호 생성기" });
+            MenuItemList.Add(new MainMenuItem { Name = "생성번호목록", ImageUrl = "hamburger_menu.png", Route = "//result" });
+            MenuItemList.Add(new MainMenuItem { Name = "랜덤생성", ImageUrl = "random.png", Route = "//result" });
+            MenuItemList.Add(new MainMenuItem { Name = "직접생성", ImageUrl = "create.png", Route = "//result" });
 
-            menuGenerateLotto.Add(new MainListMenu { Name = "생성번호목록", ImageUrl = "hamburger_menu.png" });
-            menuGenerateLotto.Add(new MainListMenu { Name = "랜덤생성", ImageUrl = "random.png" });
-            menuGenerateLotto.Add(new MainListMenu { Name = "직접생성", ImageUrl = "create.png" });
-
-
-            menuAnalysisLotto.Add(new MainListMenu { Name = "반복출현번호", ImageUrl = "patten.png" });
-            menuAnalysisLotto.Add(new MainListMenu { Name = "동반출현번호", ImageUrl = "same.png" });
-            menuAnalysisLotto.Add(new MainListMenu { Name = "번호별 출현횟수", ImageUrl = "count.png" });
-            menuAnalysisLotto.Add(new MainListMenu { Name = "패턴분석표", ImageUrl = "table.png" });
+            MenuItemList.Add(new MainMenuItemHeader { Name = "번호 분석" });
+            MenuItemList.Add(new MainMenuItem { Name = "반복출현번호", ImageUrl = "patten.png", Route = "//result" });
+            MenuItemList.Add(new MainMenuItem { Name = "동반출현번호", ImageUrl = "same.png", Route = "//result" });
+            MenuItemList.Add(new MainMenuItem { Name = "번호별 출현횟수", ImageUrl = "count.png", Route = "//result" });
+            MenuItemList.Add(new MainMenuItem { Name = "패턴분석표", ImageUrl = "table.png", Route = "//result" });
         }
 
 
-        //[RelayCommand]
-        //async void Test()
-        //{
-        //    if (dialogService is not null)
-        //    {
-        //        if (await dialogService.DisplayAlertAsync("Quit!", "Are you sure?", "Yes", "No"))
-        //        {
-        //            Application.Current?.Quit();
-        //        }
-        //    }
-        //}
-
-        //[RelayCommand]
-        //private async Task Quit()
-        //{
-        //    //if (dialogService is not null)
-        //    //{
-        //    //    if (await dialogService.DisplayAlertAsync("Quit!", "Are you sure?", "Yes", "No"))
-        //    //    {
-        //    //        Application.Current?.Quit();
-        //    //    }
-        //    //}
-        //}
-
+      
 
 
     }

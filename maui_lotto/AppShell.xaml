@@ -5,21 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:maui_lotto"    
     xmlns:pages="clr-namespace:maui_lotto.Resources.Pages"
-    FlyoutBehavior="Disabled" Shell.NavBarIsVisible="False">
-
-    <Shell.Resources>
+    FlyoutBehavior="Disabled">
+    
+    <Shell.Resources>       
     </Shell.Resources>
 
-    <ShellContent ContentTemplate="{DataTemplate pages:HomePage}" Route="home"/>
-
-
-    <!--<FlyoutItem Title="Home" Icon="{FontImage Glyph={x:Static fas:IconFont.House}, FontFamily=FAS, Color=Black}">
-        <ShellContent ContentTemplate="{DataTemplate pages:HomePage}" Route="home" />
-    </FlyoutItem>
-
-    <FlyoutItem Title="당첨결과" Icon="{FontImage Glyph={x:Static fas:IconFont.RectangleAd}, FontFamily=FAS, Color=Black}">
-        <ShellContent ContentTemplate="{DataTemplate pages:LottoResultPage}" Route="lotto_result" />
-    </FlyoutItem>-->
-
-    <!--<MenuItem Clicked="Settings_Clicked" IconImageSource="{FontImage Glyph={x:Static fas:IconFont.Gear}, FontFamily=FAS, Color=Black}" Text="Settings" />-->
+    <ShellContent ContentTemplate="{DataTemplate pages:HomePage}" Route="HomePage"/>
 </Shell>

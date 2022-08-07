@@ -1,117 +1,29 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using maui_lotto.Models;
-using maui_lotto.Util;
-using maui_lotto.ViewModels;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using VijayAnand.MauiToolkit.Core.Services;
-using VijayAnand.MauiToolkit.Services;
-using VijayAnand.Toolkit.ObjectModel;
+﻿
+
+using System.Windows.Input;
 
 namespace VijayAnand.Toolkit.ObjectModel
 {
-    public partial class BaseViewModel : ObservableValidator, IDisposable
+    public partial class BaseViewModel : ObservableObject
     {
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsNotBusy))]
-        private bool isBusy;
+        bool isBusy;
 
         [ObservableProperty]
-        private bool canLoadMore;
-
-        [ObservableProperty]
-        private string? title = string.Empty;
-
-        [ObservableProperty]
-        private string? subtitle = string.Empty;
-
-        [ObservableProperty]
-        private string? icon = string.Empty;
-
-        [ObservableProperty]
-        private string? header = string.Empty;
-
-        [ObservableProperty]
-        private string? footer = string.Empty;
-
-        [ObservableProperty]
-        private bool isValid = true;
-
-        [ObservableProperty]
-        private List<string> errors = new();
-
-
-        public string cacheDir = FileSystem.Current.CacheDirectory;
-
-        public BaseViewModel()
-        {
-            ErrorsChanged += OnErrorsChanged;
-        }
-
-        //public IDialogService DialogService { get; protected set; }
-
-        //public INavigationService NavigationService { get; protected set; }
+        string title;
 
         public bool IsNotBusy => !IsBusy;
 
+
+        public ICommand AppearingCommand { get; set; }
+
+        public bool isAppearing { get; set; }
+
+
+
+
         [ObservableProperty]
         public static List<LottoResult> lottoResult = new();
-
-
-
-        
-
-        public bool Validate()
-        {
-            Errors.Clear();
-            ValidateAllProperties();
-            Errors = GetErrors().Select(e => e.ErrorMessage).ToList();
-            IsValid = !HasErrors;
-            return IsValid;
-        }
-
-        protected virtual void Initialize(IDictionary<string, object?>? parameters = null) { }
-
-        protected virtual Task InitializeAsync(IDictionary<string, object?>? parameters = null)
-            => Task.FromResult(0);
-
-        protected void SetBusy(bool value) => IsBusy = value;
-
-        protected virtual bool SetProperty<T>(ref T field,
-                                                  T value,
-                                                  [CallerMemberName] string? propertyName = null,
-                                                  Action? onChanging = null,
-                                                  Action? onChanged = null,
-                                                  Func<T, T, bool>? validateValue = null)
-        {
-            // If value didn't change
-            if (EqualityComparer<T>.Default.Equals(field, value))
-            {
-                return false;
-            }
-
-            // If value changed but didn't validate
-            if (validateValue != null && !validateValue(field, value))
-            {
-                return false;
-            }
-
-            onChanging?.Invoke();
-            field = value;
-            onChanged?.Invoke();
-            OnPropertyChanged(propertyName);
-            return true;
-        }
-
-        private void OnErrorsChanged(object? sender, DataErrorsChangedEventArgs e)
-        {
-            IsValid = !HasErrors;
-        }
-
-        public void Dispose()
-        {
-            ErrorsChanged -= OnErrorsChanged;
-        }
     }
 }

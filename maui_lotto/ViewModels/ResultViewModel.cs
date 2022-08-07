@@ -10,18 +10,19 @@ namespace maui_lotto.ViewModels
 {
     public partial class ResultViewModel : BaseViewModel
     {
-        readonly IDialogService? dialogService;
-
-        public ICommand LoadCommand { get; protected set; }
-
         public ResultViewModel()
         {
             Title = "당첨결과";
-            dialogService = AppService.GetService<IDialogService>();
-            LoadCommand = new AsyncRelayCommand(async () =>
+            AppearingCommand = new AsyncRelayCommand(async () =>
             {
-                await Task.Delay(1000);
-                Initialize();                
+                if (isAppearing)
+                    return;
+
+                IsBusy = true;
+                Initialize();
+                IsBusy = false;
+
+                isAppearing = true;
             });
         }
 
@@ -81,29 +82,7 @@ namespace maui_lotto.ViewModels
         }
 
 
-        //[RelayCommand]
-        //async void Test()
-        //{
-        //    if (dialogService is not null)
-        //    {
-        //        if (await dialogService.DisplayAlertAsync("Quit!", "Are you sure?", "Yes", "No"))
-        //        {
-        //            Application.Current?.Quit();
-        //        }
-        //    }
-        //}
-
-        //[RelayCommand]
-        //private async Task Quit()
-        //{
-        //    //if (dialogService is not null)
-        //    //{
-        //    //    if (await dialogService.DisplayAlertAsync("Quit!", "Are you sure?", "Yes", "No"))
-        //    //    {
-        //    //        Application.Current?.Quit();
-        //    //    }
-        //    //}
-        //}
+        
 
 
 
