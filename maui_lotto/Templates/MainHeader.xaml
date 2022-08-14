@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:units="clr-namespace:maui_lotto.UI.Units">
+
+    <Style TargetType="Label" x:Key="labelNumberStyle">
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="FontAttributes" Value="Italic"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
+    <Style TargetType="{x:Type units:MainHeader}">        
+        <Setter Property="ControlTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid BindingContext="{Binding Source={RelativeSource TemplatedParent}, Path=BindingContext}">
+                        <VerticalStackLayout>
+                            <HorizontalStackLayout VerticalOptions="Center">
+                                <ImageButton Source="update.png" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="25" HeightRequest="25"/>
+                                <Label Text="업데이트" HorizontalOptions="Center" FontSize="12" TextColor="Black" VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+
+                            <Label Text="{Binding LastResult.drwNoDate}" TextColor="Black" HorizontalOptions="Center"/>
+                            <Label Text="{Binding LastResult.drwNo, StringFormat='{0}회차'}" HorizontalOptions="Center" TextColor="Black" FontSize="30"/>
+
+                            <HorizontalStackLayout HorizontalOptions="Center">
+                                <Grid Margin="2">
+                                    <Ellipse Fill="{Binding LastResult.drwtNo1, Converter={StaticResource LottoNumColorConverter}}"
+                             Stroke="{Binding LastResult.drwtNo1, Converter={StaticResource LottoNumColorConverter}}"
+                             StrokeThickness="1" WidthRequest="40" HeightRequest="40" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding LastResult.drwtNo1}" Style="{StaticResource labelNumberStyle}"/>
+                                </Grid>
+
+                                <Grid Margin="2">
+                                    <Ellipse Fill="{Binding LastResult.drwtNo2, Converter={StaticResource LottoNumColorConverter}}"
+                             Stroke="{Binding LastResult.drwtNo2, Converter={StaticResource LottoNumColorConverter}}"
+                             StrokeThickness="1" WidthRequest="40" HeightRequest="40" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding LastResult.drwtNo2}" Style="{StaticResource labelNumberStyle}"/>
+                                </Grid>
+
+                                <Grid Margin="2">
+                                    <Ellipse Fill="{Binding LastResult.drwtNo3, Converter={StaticResource LottoNumColorConverter}}"
+                             Stroke="{Binding LastResult.drwtNo3, Converter={StaticResource LottoNumColorConverter}}"
+                             StrokeThickness="1" WidthRequest="40" HeightRequest="40" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding LastResult.drwtNo3}" Style="{StaticResource labelNumberStyle}"/>
+                                </Grid>
+
+                                <Grid Margin="2">
+                                    <Ellipse Fill="{Binding LastResult.drwtNo4, Converter={StaticResource LottoNumColorConverter}}"
+                             Stroke="{Binding LastResult.drwtNo4, Converter={StaticResource LottoNumColorConverter}}"
+                             StrokeThickness="1" WidthRequest="40" HeightRequest="40" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding LastResult.drwtNo4}" Style="{StaticResource labelNumberStyle}"/>
+                                </Grid>
+
+                                <Grid Margin="2">
+                                    <Ellipse Fill="{Binding LastResult.drwtNo5, Converter={StaticResource LottoNumColorConverter}}"
+                             Stroke="{Binding LastResult.drwtNo5, Converter={StaticResource LottoNumColorConverter}}"
+                             StrokeThickness="1" WidthRequest="40" HeightRequest="40" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding LastResult.drwtNo5}" Style="{StaticResource labelNumberStyle}"/>
+                                </Grid>
+
+                                <Grid Margin="2">
+                                    <Ellipse Fill="{Binding LastResult.drwtNo6, Converter={StaticResource LottoNumColorConverter}}"
+                             Stroke="{Binding LastResult.drwtNo6, Converter={StaticResource LottoNumColorConverter}}"
+                             StrokeThickness="1" WidthRequest="40" HeightRequest="40" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding LastResult.drwtNo6}" Style="{StaticResource labelNumberStyle}"/>
+                                </Grid>
+
+                                <Grid Margin="2">
+                                    <Label Text="+" Style="{StaticResource labelNumberStyle}" TextColor="Black"/>
+                                </Grid>
+
+                                <Grid Margin="2">
+                                    <Ellipse Fill="{Binding LastResult.bnusNo, Converter={StaticResource LottoNumColorConverter}}"
+                             Stroke="{Binding LastResult.bnusNo, Converter={StaticResource LottoNumColorConverter}}"
+                             StrokeThickness="1" WidthRequest="40" HeightRequest="40" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding LastResult.bnusNo}" Style="{StaticResource labelNumberStyle}"/>
+                                </Grid>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout HorizontalOptions="Center">
+                                <Label Text="당첨금" HorizontalOptions="Center" FontSize="14"/>
+                                <Label Text="{Binding LastResult.firstWinamnt, Converter={StaticResource PrizeMoneyToMillionConverter}}" HorizontalOptions="Center" FontSize="14"/>
+                            </HorizontalStackLayout>
+
+                        </VerticalStackLayout>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

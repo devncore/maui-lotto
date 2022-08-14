@@ -1,4 +1,4 @@
-namespace maui_lotto.Resources.Pages;
+namespace maui_lotto.Views;
 
 public partial class ResultPage : ContentPage
 {

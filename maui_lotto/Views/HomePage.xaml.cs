@@ -1,4 +1,4 @@
-namespace maui_lotto.Resources.Pages;
+namespace maui_lotto.Views;
 
 public partial class HomePage : ContentPage
 {
@@ -7,4 +7,6 @@ public partial class HomePage : ContentPage
 		InitializeComponent();
 		BindingContext = viewModel;
 	}
+
+	
 }

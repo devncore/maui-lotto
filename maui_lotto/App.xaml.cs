@@ -1,6 +1,4 @@
-﻿using maui_lotto.Resources.Pages;
-
-namespace maui_lotto;
+﻿namespace maui_lotto;
 
 public partial class App : Application
 {

@@ -43,5 +43,8 @@ namespace maui_lotto.Models
         [JsonIgnore]
         public Color bgColor { get; set; }
 
+        [JsonIgnore]
+        public string prizeMoney { get; set; }
+
     }
 }

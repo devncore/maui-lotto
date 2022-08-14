@@ -91,7 +91,7 @@
 
         <HorizontalStackLayout Grid.Row="2" Margin="5">
             <Label Text="당첨금" HorizontalOptions="Center" FontSize="14"/>
-            <Label Text="{Binding firstWinamnt, StringFormat='{0:N0}원'}" HorizontalOptions="Center" FontSize="14"/>
+            <Label Text="{Binding prizeMoney}" HorizontalOptions="Center" FontSize="14"/>
         </HorizontalStackLayout>
     </Grid>
 

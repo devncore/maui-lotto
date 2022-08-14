@@ -7,6 +7,7 @@ namespace maui_lotto.ViewModels
     public partial class HomeViewModel : BaseViewModel
     {
         LottoService lottoService;
+        public ICommand SelectionCommand { get; set; }
 
         public HomeViewModel(LottoService lottoService)
         {
@@ -28,6 +29,8 @@ namespace maui_lotto.ViewModels
                 LastResult = lottoResult.LastOrDefault();
                 IsBusy = false;
             });
+
+            SelectionCommand = new AsyncRelayCommand<object>(GoToMenuItemCommand);
         }
         
         private LottoResult _LastResult;
@@ -51,17 +54,24 @@ namespace maui_lotto.ViewModels
             set
             {
                 _MenuItemListSelected = value;
-                OnPropertyChanged();
-                if (value != null && value is MainMenuItem)
-                {
-                    //GoToMenuItemCommand(value);
-                }
+                OnPropertyChanged();                
             }
         }
 
-        [RelayCommand]
-        async Task GoToMenuItemCommand(MainMenuItem item)
+        async Task GoToMenuItemCommand(object obj)
         {
+            if (obj == null)
+                return;
+
+            if(obj is MainMenuItem MenuItem)
+            {
+                switch(MenuItem.Route)
+                {
+                    
+                }
+            }
+            var item = obj as MainMenuItem;
+           
             if (item == null)
                 return;
 
@@ -74,6 +84,9 @@ namespace maui_lotto.ViewModels
             //    {"Item", item }
             //});
         }
+
+
+    
 
 
         private void InitializeMainMenuList()

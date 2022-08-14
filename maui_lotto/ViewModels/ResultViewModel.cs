@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using maui_lotto.Converters;
 using maui_lotto.Models;
 using System.Windows.Input;
 using VijayAnand.MauiToolkit.Core.Services;
@@ -10,6 +11,9 @@ namespace maui_lotto.ViewModels
 {
     public partial class ResultViewModel : BaseViewModel
     {
+        PrizeMoneyToMillionConverter PrizeMoneyToMillionConverter = new PrizeMoneyToMillionConverter();
+        LottoNumColorConverter LottoNumColorConverter = new LottoNumColorConverter();
+
         public ResultViewModel()
         {
             Title = "당첨결과";
@@ -36,41 +40,25 @@ namespace maui_lotto.ViewModels
                 int count = 0;
                 foreach (var row in list)
                 {
-                    row.color1 = LottoNumToColorConvert(row.drwtNo1);
-                    row.color2 = LottoNumToColorConvert(row.drwtNo2);
-                    row.color3 = LottoNumToColorConvert(row.drwtNo3);
-                    row.color4 = LottoNumToColorConvert(row.drwtNo4);
-                    row.color5 = LottoNumToColorConvert(row.drwtNo5);
-                    row.color6 = LottoNumToColorConvert(row.drwtNo6);
-                    row.colorBonus = LottoNumToColorConvert(row.bnusNo);
+                    row.color1 = (Brush)LottoNumColorConverter.Convert(row.drwtNo1, null, null, null);
+                    row.color2 = (Brush)LottoNumColorConverter.Convert(row.drwtNo2, null, null, null);
+                    row.color3 = (Brush)LottoNumColorConverter.Convert(row.drwtNo3, null, null, null);
+                    row.color4 = (Brush)LottoNumColorConverter.Convert(row.drwtNo4, null, null, null);
+                    row.color5 = (Brush)LottoNumColorConverter.Convert(row.drwtNo5, null, null, null);
+                    row.color6 = (Brush)LottoNumColorConverter.Convert(row.drwtNo6, null, null, null);
+                    row.colorBonus = (Brush)LottoNumColorConverter.Convert(row.bnusNo, null, null, null);
 
                     if (count % 2 == 0)
                         row.bgColor = Color.FromArgb("#D3D3D3");
                     else
                         row.bgColor = Colors.White;
 
+                    row.prizeMoney = PrizeMoneyToMillionConverter.Convert(row.firstWinamnt, null, null, null)?.ToString();
                     count++;
                 }
 
                 ResultList = list;
             }
-        }
-
-        Brush LottoNumToColorConvert(int num)
-        {
-            Brush brush = Colors.White;
-            if (num <= 10)
-                brush = Color.FromArgb("#FBC400");
-            else if (num <= 20)
-                brush = Color.FromArgb("#1E47D6");
-            else if (num <= 30)
-                brush = Color.FromArgb("#FF7272");
-            else if (num <= 40)
-                brush = Color.FromArgb("#1E1E1E");
-            else
-                brush = Color.FromArgb("#55B155");
-
-            return brush;
         }
 
 

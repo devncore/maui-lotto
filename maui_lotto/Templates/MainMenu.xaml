@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:maui_lotto.Models"
              xmlns:viewModel="clr-namespace:maui_lotto.ViewModels"
-             x:Class="maui_lotto.Controls.MainMenu"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="maui_lotto.Templates.MainMenu"
              x:DataType="viewModel:HomeViewModel"
              x:Name="contentview">
 
@@ -38,10 +39,8 @@
             <ViewCell>
                 <Frame>
                     <Frame.GestureRecognizers>
-                        <!--<TapGestureRecognizer
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:HomeViewModel}}, Path=GoToMenuItemCommand}"
-                                        CommandParameter="{Binding}"/>-->
-                        <TapGestureRecognizer Tapped="MenuSelectedCommand" CommandParameter="{Binding}"/>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource Mode=TemplatedParent, AncestorType={x:Type ListView}}, Path=BindingContext.SelectionCommand}"
+                                              CommandParameter="{Binding}"/>
                     </Frame.GestureRecognizers>
 
                     <HorizontalStackLayout>
@@ -63,7 +62,10 @@
         <ListView ItemsSource="{Binding MenuItemList}" 
                   Style="{StaticResource MainMenuListViewStyle}"
                   ItemTemplate="{StaticResource MenuItemDataTemplateSelector}"
-                  SelectedItem="{Binding MenuItemListSelected, Mode=TwoWay}">            
+                  SelectedItem="{Binding MenuItemListSelected}">
+            <!--<ListView.Behaviors>
+                <toolkit:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectionCommand}"/>
+            </ListView.Behaviors>-->
         </ListView>        
     </ScrollView>
 </ContentView>

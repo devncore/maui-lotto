@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage x:Class="maui_lotto.Resources.Pages.HomePage"
+<ContentPage x:Class="maui_lotto.Views.HomePage"
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"                             
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:pages="clr-namespace:maui_lotto.Resources.Pages"                
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
              xmlns:vm="clr-namespace:maui_lotto.ViewModels"    
-             xmlns:controls="clr-namespace:maui_lotto.Controls"
+             xmlns:controls="clr-namespace:maui_lotto.Templates"
+             xmlns:units="clr-namespace:maui_lotto.UI.Units"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:maui_lotto.Models"
              x:DataType="vm:HomeViewModel">
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding AppearingCommand}" />
     </ContentPage.Behaviors>
+
     
-    <Grid>
-        <VerticalStackLayout>
-            <controls:MainHeader/>
-            <controls:MainMenu/>
-        </VerticalStackLayout>
+
+
+    <Grid  BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <units:MainHeader/>
+        <controls:MainMenu Grid.Row="1"/>
 
         <ActivityIndicator
             Grid.RowSpan="2"

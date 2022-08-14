@@ -84,11 +84,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Controls\MainMenu.xaml.cs">
+	  <Compile Update="Templates\MainMenu.xaml.cs">
 	    <DependentUpon>MainMenu.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Controls\MainHeader.xaml.cs">
-	    <DependentUpon>MainHeader.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Templates\ResultItem.xaml.cs">
 	    <DependentUpon>ResultItem.xaml</DependentUpon>
@@ -99,10 +96,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Controls\MainMenu.xaml">
+	  <MauiXaml Update="Templates\MainHeader.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Controls\MainHeader.xaml">
+	  <MauiXaml Update="Templates\MainMenu.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Templates\ResultItem.xaml">
@@ -117,10 +114,6 @@
 	  <MauiXaml Update="Views\MauiPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="UI\Units\" />
 	</ItemGroup>
 
 </Project>
